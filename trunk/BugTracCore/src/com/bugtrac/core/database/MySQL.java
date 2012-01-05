@@ -62,8 +62,7 @@ public class MySQL {
             Class.forName("com.mysql.jdbc.Driver");
  
             // Finally connecting to the MySQL database.
-            conn = DriverManager.getConnection("jdbc:mysql://" + Host + ":"
-                    + Port + "/" + database + "?" + "user=" + User + "&"
+            conn = DriverManager.getConnection("jdbc:mysql://" + Host + "/" + database + "?" + "user=" + User + "&"
                     + "password=" + Password);
         } catch (ClassNotFoundException e) {
             System.out.println("Please check if the mysql driver for Java is available!");
