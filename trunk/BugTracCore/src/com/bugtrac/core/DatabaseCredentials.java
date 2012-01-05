@@ -22,38 +22,50 @@
 
 package com.bugtrac.core;
 
-import com.bugtrac.core.database.MySQL;
+public class DatabaseCredentials {
+	private String host;
+	private String database;
+	private String password;
+	private String username;
+	
+	public String getHost() {
+		return host;
+	}
 
-public class DatabaseAccess {
-	MySQL mysql = null;
-	
-	public DatabaseAccess(DatabaseType type, DatabaseCredentials auth)
-	{
-		if (type == DatabaseType.MySQL)
-		{
-			mysql = new MySQL(auth.getHost(), auth.getDatabase(), auth.getUsername(), auth.getPassword());
-			mysql.connect();
-		}
+	public void setHost(String host) {
+		this.host = host;
+	}
+
+	public String getDatabase() {
+		return database;
+	}
+
+	public void setDatabase(String database) {
+		this.database = database;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
-	public Boolean executeSQL(String sql)
+	public DatabaseCredentials(String host, String database, String username, String password)
 	{
-		if (mysql != null)
-		{
-			return mysql.executeSQL(sql);
-		}
-		
-		return false;
-	}
-	
-	public String[] getValue(String sql, int numRows)
-	{
-		if (mysql != null)
-		{
-			return mysql.getValue(sql, numRows);
-		}
-		
-		return new String[] { "error" };
+		this.host = host;
+		this.database = database;
+		this.password = password;
+		this.username = username;
 	}
 
 }
