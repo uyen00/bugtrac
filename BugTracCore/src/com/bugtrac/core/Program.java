@@ -22,21 +22,46 @@
 
 package com.bugtrac.core;
 
+import java.io.Console;
+
 public class Program {
-	DatabaseAccess dba = null;
+	static DatabaseAccess dba = null;
 	
 	public static void main(String[] args) {
+		dba = new DatabaseAccess(DatabaseType.MySQL, new DatabaseCredentials("localhost", "bugtrac", "root", ""));
+		
+		Console cons = System.console();
 		
 		argsParser(args);
+		
+		String cmd = null;
+		String[] cmds = null;
+		
+		while ((cmd = cons.readLine()) != "break")
+		{
+			cmds = cmd.split(" ");
+			String[] cmdsf = new String[cmds.length + 1];
+			
+			System.arraycopy(cmds, 0, cmdsf, 1, cmds.length);
+			
+			cmdsf[0] = new String("");
+			
+			argsParser(cmds);
+		}
+		
 	}
 	
 	public static void argsParser(String[] args)
 	{
 		try
 		{
-			if (args[0] == "update")
+			if (args[1] == "update")
 			{
-				
+				dba.executeSQL(args[2]);
+			}
+			else if (args[1] == "get")
+			{
+				dba.getValue(args[2], Integer.parseInt(args[3]));
 			}
 		}
 		catch (Exception e) { e.printStackTrace(); }
