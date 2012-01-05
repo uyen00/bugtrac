@@ -25,6 +25,8 @@ package com.bugtrac.core.database;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 
 public class MySQL {
     private static java.sql.Connection conn = null;
